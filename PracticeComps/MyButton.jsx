@@ -7,7 +7,7 @@ import React from 'react';
 import {StyleSheet, Text, Pressable} from 'react-native';
 import {useState} from 'react';
 
-export default function MyPressable() {
+export default function MyButton() {
   const [bgColor, setBgColor] = useState('yellow');
   const [textColor, setTextColor] = useState('black');
 

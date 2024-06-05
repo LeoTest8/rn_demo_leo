@@ -5,26 +5,30 @@
 
 import React from 'react';
 import {StyleSheet, Text, Pressable} from 'react-native';
-
-const longPressHandle = () => {
-  console.log('Long Press');
-};
-
-const pressInHandle = () => {
-  console.log('Press In');
-};
-
-const pressOutHandle = () => {
-  console.log('Press Out');
-};
+import {useState} from 'react';
 
 export default function MyPressable() {
+  const [bgColor, setBgColor] = useState('yellow');
+  const longPressHandle = () => {
+    console.log('Long Press');
+  };
+
+  const pressInHandle = () => {
+    console.log('Press In', bgColor);
+    setBgColor('red');
+    console.log(bgColor);
+  };
+
+  const pressOutHandle = () => {
+    console.log('Press Out');
+    setBgColor("yellow")
+  };
   return (
     <Pressable
       onLongPress={longPressHandle}
       onPressIn={pressInHandle}
       onPressOut={pressOutHandle}
-      style={styles.testBtn}>
+      style={[styles.testBtn, {backgroundColor: bgColor}]}>
       <Text>Press Me</Text>
     </Pressable>
   );
@@ -32,13 +36,16 @@ export default function MyPressable() {
 
 const styles = StyleSheet.create({
   testBtn: {
-    width: 100,
-    height: 50,
+    // width: 430,
+    // height: 50,
+    margin: 10,
+    padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: 'red',
     borderWidth: 1,
     borderRadius: 10,
     backgroundColor: 'yellow',
+    pointerEvents: 'box-only',
   },
 });

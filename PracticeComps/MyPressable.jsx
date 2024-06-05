@@ -9,27 +9,38 @@ import {useState} from 'react';
 
 export default function MyPressable() {
   const [bgColor, setBgColor] = useState('yellow');
+  const [textColor, setTextColor] = useState('black');
+
   const longPressHandle = () => {
     console.log('Long Press');
   };
 
   const pressInHandle = () => {
-    console.log('Press In', bgColor);
     setBgColor('red');
-    console.log(bgColor);
+    setTextColor('white');
   };
 
   const pressOutHandle = () => {
-    console.log('Press Out');
-    setBgColor("yellow")
+    setBgColor('yellow');
+    setTextColor('black');
   };
   return (
     <Pressable
       onLongPress={longPressHandle}
       onPressIn={pressInHandle}
       onPressOut={pressOutHandle}
-      style={[styles.testBtn, {backgroundColor: bgColor}]}>
-      <Text>Press Me</Text>
+      style={[
+        styles.testBtn,
+        {
+          backgroundColor: bgColor,
+        },
+      ]}>
+      <Text
+        style={{
+          color: textColor,
+        }}>
+        Press Me
+      </Text>
     </Pressable>
   );
 }
@@ -45,7 +56,5 @@ const styles = StyleSheet.create({
     borderColor: 'red',
     borderWidth: 1,
     borderRadius: 10,
-    backgroundColor: 'yellow',
-    pointerEvents: 'box-only',
   },
 });

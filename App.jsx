@@ -64,35 +64,69 @@
  * Operations:
  */
 
-import React from 'react';
-import {StyleSheet, Text, SafeAreaView, View, Button} from 'react-native';
+// import React from 'react';
+// import {StyleSheet, Text, SafeAreaView, View, Button} from 'react-native';
+// import {NavigationContainer} from '@react-navigation/native';
+// import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+// const Home = ({navigation}) => {
+//   return (
+//     <SafeAreaView style={styles.container}>
+//       <Text>Home Screen</Text>
+//       <Button
+//         title="Go To Details"
+//         onPress={() => {
+//           navigation.navigate('Details', {
+//             id: 4523,
+//           });
+//         }}></Button>
+//     </SafeAreaView>
+//   );
+// };
+
+// const Details = ({navigation, route}) => {
+//   return (
+//     <SafeAreaView style={styles.container}>
+//       <Text>Details Screen</Text>
+//       <Text>Params From Home:</Text>
+//       <Text>{JSON.stringify(route.params)}</Text>
+//     </SafeAreaView>
+//   );
+// };
+
+// const Stack = createNativeStackNavigator();
+
+// export default function App() {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         <Stack.Screen component={Home} name="Home"></Stack.Screen>
+//         <Stack.Screen
+//           component={Details}
+//           name="Details"
+//           options={{
+//             headerStyle: {
+//               backgroundColor: '#fef422',
+//             },
+//             headerTintColor: 'red',
+//           }}></Stack.Screen>
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+// })
+
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
-const Home = ({navigation}) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go To Details"
-        onPress={() => {
-          navigation.navigate('Details', {
-            id: 4523,
-          });
-        }}></Button>
-    </SafeAreaView>
-  );
-};
-
-const Details = ({navigation, route}) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text>Details Screen</Text>
-      <Text>Params From Home:</Text>
-      <Text>{JSON.stringify(route.params)}</Text>
-    </SafeAreaView>
-  );
-};
+import React, {useState, useEffect} from 'react';
+import {Text, View, SafeAreaView, Button} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
@@ -100,25 +134,43 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen component={Home} name="Home"></Stack.Screen>
         <Stack.Screen
-          component={Details}
-          name="Details"
+          component={HomeScreen}
+          name="Home"
           options={{
             headerStyle: {
-              backgroundColor: '#fef422',
+              backgroundColor: '#dcf',
             },
-            headerTintColor: 'red',
+            headerRight: () => <Button title="Update Count"></Button>,
           }}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+function HomeScreen({navigation}) {
+  const [Count, setCount] = useState(0);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button
+          onPress={() => setCount(c => c + 1)}
+          title="UpadateCount"
+          color={''}></Button>
+      ),
+    });
+  }, [navigation]);
+
+  return (
+    <SafeAreaView
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <Text>Home Screen</Text>
+      <Text>Count: {Count}</Text>
+    </SafeAreaView>
+  );
+}

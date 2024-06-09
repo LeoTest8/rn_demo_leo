@@ -84,8 +84,7 @@ const Home = ({navigation}) => {
   );
 };
 
-const Details = ({route}) => {
-  console.log(route);
+const Details = ({navigation, route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <Text>Details Screen</Text>
@@ -102,7 +101,15 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen component={Home} name="Home"></Stack.Screen>
-        <Stack.Screen component={Details} name="Details"></Stack.Screen>
+        <Stack.Screen
+          component={Details}
+          name="Details"
+          options={{
+            headerStyle: {
+              backgroundColor: '#fef422',
+            },
+            headerTintColor: 'red',
+          }}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -123,54 +123,156 @@
 //   },
 // })
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React, {useState, useEffect} from 'react';
+/**
+ * Main Title: React Navigation Practice 3
+ *   - Header Buttons
+ * Created Time: Monday, June 10, 2024, 12:29
+ */
+// import {NavigationContainer} from '@react-navigation/native';
+// import {createNativeStackNavigator} from '@react-navigation/native-stack';
+// import React, {useState, useEffect} from 'react';
+// import {Text, View, SafeAreaView, Button} from 'react-native';
+
+// const Stack = createNativeStackNavigator();
+
+// export default function App() {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         <Stack.Screen
+//           component={HomeScreen}
+//           name="Home"
+//           options={{
+//             headerStyle: {
+//               backgroundColor: '#dcf',
+//             },
+//             headerRight: () => <Button title="Update Count"></Button>,
+//           }}></Stack.Screen>
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }
+
+// function HomeScreen({navigation}) {
+//   const [Count, setCount] = useState(0);
+
+//   useEffect(() => {
+//     navigation.setOptions({
+//       headerRight: () => (
+//         <Button
+//           onPress={() => setCount(c => c + 1)}
+//           title="UpadateCount"
+//           color={''}></Button>
+//       ),
+//     });
+//   }, [navigation]);
+
+//   return (
+//     <SafeAreaView
+//       style={{
+//         flex: 1,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//       }}>
+//       <Text>Home Screen</Text>
+//       <Text>Count: {Count}</Text>
+//     </SafeAreaView>
+//   );
+// }
+
+/**
+ * Main Title: React Navigation Practice 4
+ *   - Tab Navigation
+ * Created Time: Monday, June 10, 2024, 12:29
+ */
+
+import React from 'react';
 import {Text, View, SafeAreaView, Button} from 'react-native';
+import {NavigationContainer, TabRouter} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-export default function App() {
+const Tab1 = () => {
+  return <Text>Tab1</Text>;
+};
+const Tab2 = () => {
+  return <Text>Tab2</Text>;
+};
+const Tab3 = () => {
+  return <Text>Tab3</Text>;
+};
+const Tab4 = () => {
+  return <Text>Tab4</Text>;
+};
+
+const DetailsScreen = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          component={HomeScreen}
-          name="Home"
-          options={{
-            headerStyle: {
-              backgroundColor: '#dcf',
-            },
-            headerRight: () => <Button title="Update Count"></Button>,
-          }}></Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Feed"
+        component={Tab1}
+        options={{
+          headerShown: false,
+          tabBarActiveBackgroundColor: '#fe34cc',
+        }}></Tab.Screen>
+      <Tab.Screen
+        name="Profie"
+        component={Tab2}
+        options={{
+          tabBarActiveTintColor: '#3c3cfd',
+        }}></Tab.Screen>
+      <Tab.Screen
+        name="Page"
+        component={Tab3}
+        options={{
+          headerShown: false,
+          tabBarActiveBackgroundColor: '#ccc',
+        }}></Tab.Screen>
+      <Tab.Screen
+        name="Like"
+        component={Tab4}
+        options={{
+          tabBarActiveBackgroundColor: '#d4d',
+          tabBarButton: () => {
+            return (
+              <Button
+                onPress={() => console.log('Pressed Tab4')}
+                title="Like"></Button>
+            );
+          },
+        }}></Tab.Screen>
+    </Tab.Navigator>
   );
-}
+};
 
-function HomeScreen({navigation}) {
-  const [Count, setCount] = useState(0);
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <Button
-          onPress={() => setCount(c => c + 1)}
-          title="UpadateCount"
-          color={''}></Button>
-      ),
-    });
-  }, [navigation]);
-
+const HomeScreen = ({navigation}) => {
   return (
-    <SafeAreaView
+    <View
       style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
       }}>
       <Text>Home Screen</Text>
-      <Text>Count: {Count}</Text>
-    </SafeAreaView>
+      <Button
+        onPress={() => {
+          navigation.navigate('Details');
+        }}
+        title="Go To Details"></Button>
+    </View>
+  );
+};
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen}></Stack.Screen>
+        <Stack.Screen name="Details" component={DetailsScreen}></Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }

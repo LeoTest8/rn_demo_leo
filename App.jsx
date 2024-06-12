@@ -90,6 +90,14 @@
 //       <Text>Details Screen</Text>
 //       <Text>Params From Home:</Text>
 //       <Text>{JSON.stringify(route.params)}</Text>
+//       <Button
+//         onPress={() => {
+//           navigation.setParams({
+//             update: 'update',
+//             initialID: 'Hello Update',
+//           });
+//         }}
+//         title="Update Param"></Button>
 //     </SafeAreaView>
 //   );
 // };
@@ -104,12 +112,7 @@
 //         <Stack.Screen
 //           component={Details}
 //           name="Details"
-//           options={{
-//             headerStyle: {
-//               backgroundColor: '#fef422',
-//             },
-//             headerTintColor: 'red',
-//           }}></Stack.Screen>
+//           initialParams={{initialID: 'Hello Initial'}}></Stack.Screen>
 //       </Stack.Navigator>
 //     </NavigationContainer>
 //   );
@@ -121,7 +124,7 @@
 //     justifyContent: 'center',
 //     alignItems: 'center',
 //   },
-// })
+// });
 
 /**
  * Main Title: React Navigation Practice 3
@@ -186,93 +189,164 @@
  * Created Time: Monday, June 10, 2024, 12:29
  */
 
-import React from 'react';
-import {Text, View, SafeAreaView, Button} from 'react-native';
-import {NavigationContainer, TabRouter} from '@react-navigation/native';
+// import React from 'react';
+// import {Text, View, SafeAreaView, Button} from 'react-native';
+// import {NavigationContainer, TabRouter} from '@react-navigation/native';
+// import {createNativeStackNavigator} from '@react-navigation/native-stack';
+// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+// const Stack = createNativeStackNavigator();
+// const Tab = createBottomTabNavigator();
+
+// const Tab1 = () => {
+//   return <Text>Tab1</Text>;
+// };
+// const Tab2 = () => {
+//   return <Text>Tab2</Text>;
+// };
+// const Tab3 = () => {
+//   return <Text>Tab3</Text>;
+// };
+// const Tab4 = () => {
+//   return <Text>Tab4</Text>;
+// };
+
+// const DetailsScreen = () => {
+//   return (
+//     <Tab.Navigator>
+//       <Tab.Screen
+//         name="Feed"
+//         component={Tab1}
+//         options={{
+//           headerShown: false,
+//           tabBarActiveBackgroundColor: '#fe34cc',
+//         }}></Tab.Screen>
+//       <Tab.Screen
+//         name="Profie"
+//         component={Tab2}
+//         options={{
+//           tabBarActiveTintColor: '#3c3cfd',
+//         }}></Tab.Screen>
+//       <Tab.Screen
+//         name="Page"
+//         component={Tab3}
+//         options={{
+//           headerShown: false,
+//           tabBarActiveBackgroundColor: '#ccc',
+//         }}></Tab.Screen>
+//       <Tab.Screen
+//         name="Like"
+//         component={Tab4}
+//         options={{
+//           tabBarActiveBackgroundColor: '#d4d',
+//           tabBarButton: () => {
+//             return (
+//               <Button
+//                 onPress={() => console.log('Pressed Tab4')}
+//                 title="Like"></Button>
+//             );
+//           },
+//         }}></Tab.Screen>
+//     </Tab.Navigator>
+//   );
+// };
+
+// const HomeScreen = ({navigation}) => {
+//   return (
+//     <View
+//       style={{
+//         flex: 1,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//       }}>
+//       <Text>Home Screen</Text>
+//       <Button
+//         onPress={() => {
+//           navigation.navigate('Details');
+//         }}
+//         title="Go To Details"></Button>
+//     </View>
+//   );
+// };
+
+// export default function App() {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         <Stack.Screen name="Home" component={HomeScreen}></Stack.Screen>
+//         <Stack.Screen name="Details" component={DetailsScreen}></Stack.Screen>
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }
+
+/**
+ * Main Title: Passing params to previous screens
+ * Created Time: Wednesday, June 12, 2024, 12:34
+ */
+
+import React, {useState} from 'react';
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  View,
+  Button,
+  TextInput,
+} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-
-const Tab1 = () => {
-  return <Text>Tab1</Text>;
-};
-const Tab2 = () => {
-  return <Text>Tab2</Text>;
-};
-const Tab3 = () => {
-  return <Text>Tab3</Text>;
-};
-const Tab4 = () => {
-  return <Text>Tab4</Text>;
-};
-
-const DetailsScreen = () => {
+const Home = ({navigation, route}) => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="Feed"
-        component={Tab1}
-        options={{
-          headerShown: false,
-          tabBarActiveBackgroundColor: '#fe34cc',
-        }}></Tab.Screen>
-      <Tab.Screen
-        name="Profie"
-        component={Tab2}
-        options={{
-          tabBarActiveTintColor: '#3c3cfd',
-        }}></Tab.Screen>
-      <Tab.Screen
-        name="Page"
-        component={Tab3}
-        options={{
-          headerShown: false,
-          tabBarActiveBackgroundColor: '#ccc',
-        }}></Tab.Screen>
-      <Tab.Screen
-        name="Like"
-        component={Tab4}
-        options={{
-          tabBarActiveBackgroundColor: '#d4d',
-          tabBarButton: () => {
-            return (
-              <Button
-                onPress={() => console.log('Pressed Tab4')}
-                title="Like"></Button>
-            );
-          },
-        }}></Tab.Screen>
-    </Tab.Navigator>
+    <SafeAreaView style={styles.container}>
+      <Button
+        title="Create Post"
+        onPress={() => {
+          navigation.navigate('CreatePost');
+        }}></Button>
+      <Text style={{margin: 10}}>Post: {route.params?.post}</Text>
+    </SafeAreaView>
   );
 };
 
-const HomeScreen = ({navigation}) => {
+const CreatePost = ({navigation}) => {
+  const [post, setPost] = useState('');
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Text>Home Screen</Text>
+    <SafeAreaView style={styles.container}>
+      <TextInput
+        multiline
+        placeholder="What's on your mind?"
+        value={post}
+        onChangeText={setPost}></TextInput>
       <Button
         onPress={() => {
-          navigation.navigate('Details');
+          navigation.navigate('Home', {
+            post: post,
+          });
         }}
-        title="Go To Details"></Button>
-    </View>
+        title="Done"></Button>
+    </SafeAreaView>
   );
 };
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen}></Stack.Screen>
-        <Stack.Screen name="Details" component={DetailsScreen}></Stack.Screen>
+        <Stack.Screen component={Home} name="Home"></Stack.Screen>
+        <Stack.Screen component={CreatePost} name="CreatePost"></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

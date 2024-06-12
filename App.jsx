@@ -285,68 +285,221 @@
  * Created Time: Wednesday, June 12, 2024, 12:34
  */
 
-import React, {useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  View,
-  Button,
-  TextInput,
-} from 'react-native';
+// import React, {useState} from 'react';
+// import {
+//   StyleSheet,
+//   Text,
+//   SafeAreaView,
+//   View,
+//   Button,
+//   TextInput,
+// } from 'react-native';
+// import {NavigationContainer} from '@react-navigation/native';
+// import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+// const Home = ({navigation, route}) => {
+//   return (
+//     <SafeAreaView style={styles.container}>
+//       <Button
+//         title="Create Post"
+//         onPress={() => {
+//           navigation.navigate('CreatePost');
+//         }}></Button>
+//       <Text style={{margin: 10}}>Post: {route.params?.post}</Text>
+//     </SafeAreaView>
+//   );
+// };
+
+// const CreatePost = ({navigation}) => {
+//   const [post, setPost] = useState('');
+//   return (
+//     <SafeAreaView style={styles.container}>
+//       <TextInput
+//         multiline
+//         placeholder="What's on your mind?"
+//         value={post}
+//         onChangeText={setPost}></TextInput>
+//       <Button
+//         onPress={() => {
+//           navigation.navigate('Home', {
+//             post: post,
+//           });
+//         }}
+//         title="Done"></Button>
+//     </SafeAreaView>
+//   );
+// };
+
+// const Stack = createNativeStackNavigator();
+
+// export default function App() {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         <Stack.Screen component={Home} name="Home"></Stack.Screen>
+//         <Stack.Screen component={CreatePost} name="CreatePost"></Stack.Screen>
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'center',
+//     alignItems: 'center',
+//   },
+// });
+
+/**
+ * Main Title: Using params in the title
+ * Created Time: Wednesday, June 12, 2024, 12:34
+ */
+// import * as React from 'react';
+// import {View, Text, Button} from 'react-native';
+// import {NavigationContainer} from '@react-navigation/native';
+// import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+// function HomeScreen({navigation}) {
+//   return (
+//     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+//       <Text>Home Screen</Text>
+//       <Button
+//         title="Go to Profile"
+//         onPress={() =>
+//           navigation.navigate('Profile', {name: 'Custom profile header'})
+//         }
+//       />
+//     </View>
+//   );
+// }
+
+// function ProfileScreen({navigation}) {
+//   return (
+//     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+//       <Text>Profile screen</Text>
+//       <Button title="Go back" onPress={() => navigation.goBack()} />
+//       <Button
+//         title="Update Options"
+//         onPress={() =>
+//           navigation.setOptions({
+//             title: 'Profile Updated',
+//             headerTintColor: 'red',
+//           })
+//         }></Button>
+//     </View>
+//   );
+// }
+
+// const Stack = createNativeStackNavigator();
+
+// function App() {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         <Stack.Screen
+//           name="Home"
+//           component={HomeScreen}
+//           options={{title: 'My home'}}
+//         />
+//         <Stack.Screen
+//           name="Profile"
+//           component={ProfileScreen}
+//           options={({route}) => ({title: route.params.name})}
+//         />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }
+
+// export default App;
+
+/**
+ * Main Title: Using params in the title
+ * Created Time: Wednesday, June 12, 2024, 12:34
+ */
+// import * as React from 'react';
+// import {View, Text, Button} from 'react-native';
+// import {NavigationContainer} from '@react-navigation/native';
+// import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+// const Stack = createNativeStackNavigator();
+
+// function HomeScreen() {
+//   return (
+//     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+//       <Text>Home Screen</Text>
+//     </View>
+//   );
+// }
+
+// export default function App() {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         <Stack.Screen
+//           name="Home"
+//           component={HomeScreen}
+//           options={{headerTitle: props => <Text {...props}>Hello Home</Text>}}
+//         />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }
+
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
-const Home = ({navigation, route}) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Button
-        title="Create Post"
-        onPress={() => {
-          navigation.navigate('CreatePost');
-        }}></Button>
-      <Text style={{margin: 10}}>Post: {route.params?.post}</Text>
-    </SafeAreaView>
-  );
-};
-
-const CreatePost = ({navigation}) => {
-  const [post, setPost] = useState('');
-  return (
-    <SafeAreaView style={styles.container}>
-      <TextInput
-        multiline
-        placeholder="What's on your mind?"
-        value={post}
-        onChangeText={setPost}></TextInput>
-      <Button
-        onPress={() => {
-          navigation.navigate('Home', {
-            post: post,
-          });
-        }}
-        title="Done"></Button>
-    </SafeAreaView>
-  );
-};
+import {Button, SafeAreaView, Text} from 'react-native';
+import React, {useEffect, useState} from 'react';
 
 const Stack = createNativeStackNavigator();
+
+const HomeScreen = ({navigation}) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <>
+          <Button
+            title="+"
+            onPress={() => {
+              setCount(c => c + 1);
+            }}></Button>
+          <Button
+            title="-"
+            onPress={() => {
+              setCount(c => c - 1);
+            }}></Button>
+          <Button
+            title="0"
+            onPress={() => {
+              setCount(0);
+            }}></Button>
+        </>
+      ),
+    });
+  }, []);
+
+  return (
+    <SafeAreaView
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <Text>Home Screen</Text>
+      <Text>Count: {count}</Text>
+    </SafeAreaView>
+  );
+};
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen component={Home} name="Home"></Stack.Screen>
-        <Stack.Screen component={CreatePost} name="CreatePost"></Stack.Screen>
+        <Stack.Screen component={HomeScreen} name="Home"></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

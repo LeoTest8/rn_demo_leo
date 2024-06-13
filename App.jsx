@@ -447,59 +447,72 @@
 //   );
 // }
 
+// import {NavigationContainer} from '@react-navigation/native';
+// import {createNativeStackNavigator} from '@react-navigation/native-stack';
+// import {Button, SafeAreaView, Text} from 'react-native';
+// import React, {useEffect, useState} from 'react';
+
+// const Stack = createNativeStackNavigator();
+
+// const HomeScreen = ({navigation}) => {
+//   const [count, setCount] = useState(0);
+
+//   useEffect(() => {
+//     navigation.setOptions({
+//       headerRight: () => (
+//         <>
+//           <Button
+//             title="+"
+//             onPress={() => {
+//               setCount(c => c + 1);
+//             }}></Button>
+//           <Button
+//             title="-"
+//             onPress={() => {
+//               setCount(c => c - 1);
+//             }}></Button>
+//           <Button
+//             title="0"
+//             onPress={() => {
+//               setCount(0);
+//             }}></Button>
+//         </>
+//       ),
+//     });
+//   }, []);
+
+//   return (
+//     <SafeAreaView
+//       style={{
+//         flex: 1,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//       }}>
+//       <Text>Home Screen</Text>
+//       <Text>Count: {count}</Text>
+//     </SafeAreaView>
+//   );
+// };
+
+// export default function App() {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         <Stack.Screen component={HomeScreen} name="Home"></Stack.Screen>
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }
+
+import React from 'react';
+import {Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Button, SafeAreaView, Text} from 'react-native';
-import React, {useEffect, useState} from 'react';
-
-const Stack = createNativeStackNavigator();
-
-const HomeScreen = ({navigation}) => {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <>
-          <Button
-            title="+"
-            onPress={() => {
-              setCount(c => c + 1);
-            }}></Button>
-          <Button
-            title="-"
-            onPress={() => {
-              setCount(c => c - 1);
-            }}></Button>
-          <Button
-            title="0"
-            onPress={() => {
-              setCount(0);
-            }}></Button>
-        </>
-      ),
-    });
-  }, []);
-
-  return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Text>Home Screen</Text>
-      <Text>Count: {count}</Text>
-    </SafeAreaView>
-  );
-};
+import {MyDrawer} from './PracticeComps';
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen component={HomeScreen} name="Home"></Stack.Screen>
-      </Stack.Navigator>
+      <MyDrawer></MyDrawer>
     </NavigationContainer>
   );
 }

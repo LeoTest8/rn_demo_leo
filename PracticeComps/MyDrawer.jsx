@@ -1,3 +1,7 @@
+/**
+ * Main Title: My Drawer
+ * Creted Time: Friday, June 14, 12:03
+ */
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';

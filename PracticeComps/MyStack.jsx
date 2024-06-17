@@ -6,9 +6,9 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
 
-const Drawer = createStackNavigator();
+const Stack = createStackNavigator();
 
-const FeedDrawerScreen = () => {
+const FeedStackScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text>Home1 Screen</Text>
@@ -16,7 +16,7 @@ const FeedDrawerScreen = () => {
   );
 };
 
-const ProfileDrawerScreen = () => {
+const ProfileStackScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text>Home2 Screen</Text>
@@ -24,14 +24,14 @@ const ProfileDrawerScreen = () => {
   );
 };
 
-export default function MyDrawer() {
+export default function MyStack() {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen component={FeedDrawerScreen} name="Home1"></Drawer.Screen>
-      <Drawer.Screen
-        component={ProfileDrawerScreen}
-        name="Home2"></Drawer.Screen>
-    </Drawer.Navigator>
+    <Stack.Navigator>
+      <Stack.Screen component={FeedStackScreen} name="Home1"></Stack.Screen>
+      <Stack.Screen
+        component={ProfileStackScreen}
+        name="Home2"></Stack.Screen>
+    </Stack.Navigator>
   );
 }
 

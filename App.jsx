@@ -528,12 +528,12 @@
 import React from 'react';
 import {Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {MyDrawer} from './PracticeComps';
+import {MyStack} from './PracticeComps';
 
 export default function App() {
   return (
     <NavigationContainer>
-      <MyDrawer></MyDrawer>
+      <MyStack></MyStack>
     </NavigationContainer>
   );
 }

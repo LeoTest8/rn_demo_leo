@@ -504,6 +504,27 @@
 //   );
 // }
 
+/**
+ * Main Title: My Drawer
+ * Creted Time: Friday, June 14, 12:03
+ */
+// import React from 'react';
+// import {Text} from 'react-native';
+// import {NavigationContainer} from '@react-navigation/native';
+// import {MyDrawer} from './PracticeComps';
+
+// export default function App() {
+//   return (
+//     <NavigationContainer>
+//       <MyDrawer></MyDrawer>
+//     </NavigationContainer>
+//   );
+// }
+
+/**
+ * Main Title: My Drawer
+ * Creted Time: Friday, June 14, 12:03
+ */
 import React from 'react';
 import {Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';

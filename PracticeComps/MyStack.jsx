@@ -1,17 +1,17 @@
 /**
- * Main Title: My Drawer
- * Creted Time: Friday, June 14, 12:03
+ * Main Title: My Stack Navigator
+ * Creted Time: Friday, June 14, 20:33
  */
 import React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createStackNavigator} from '@react-navigation/stack';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
 
-const Drawer = createDrawerNavigator();
+const Drawer = createStackNavigator();
 
 const FeedDrawerScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Feed Screen</Text>
+      <Text>Home1 Screen</Text>
     </SafeAreaView>
   );
 };
@@ -19,7 +19,7 @@ const FeedDrawerScreen = () => {
 const ProfileDrawerScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Profile Screen</Text>
+      <Text>Home2 Screen</Text>
     </SafeAreaView>
   );
 };
